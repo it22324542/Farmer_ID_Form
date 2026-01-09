@@ -1,0 +1,413 @@
+Farmer_id_form.css
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans Sinhala', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    background-color: #f8fafc;
+    padding: 24px;
+}
+
+/* Container */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+}
+
+/* Page Description */
+.description {
+    font-size: 14px;
+    color: #fd5050;
+    margin-bottom: 24px;
+    text-align: left;
+    line-height: 1.7;
+}
+
+/* Page Title */
+.title {
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 32px;
+    color: #701a1a;
+    text-decoration: none;
+}
+
+/* Section Styling */
+.office-section,
+.location-section,
+.personal-info-section {
+    border: 1px solid #797575;
+    padding: 24px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    background-color: #9f9c9c0f;
+}
+
+/* Office Section Header */
+.office-header {
+    font-size: 13px;
+    color: #fd5050;
+    margin-bottom: 16px;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-row {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 280px;
+}
+
+/* Labels */
+label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #1f2937;
+}
+
+.office-section label {
+    font-size: 15px;
+}
+
+/* Input Fields */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="date"],
+input[type="number"],
+textarea {
+    width: 97%;
+    padding: 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #ffffff;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    outline: none;
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* File Input */
+input[type="file"] {
+    width: 97%;
+    padding: 12px;
+    border: 1px dashed #1e3a8a;
+    border-radius: 6px;
+    background-color: #f9fafb;
+    cursor: pointer;
+    font-size: 14px;
+}
+/* Fix invisible dropdown text (for all select boxes) */
+select, option {
+  color: #000 !important;
+  background-color: #fff !important;
+}
+
+input[type="file"]:hover {
+    background-color: #eff6ff;
+}
+
+/* Radio Button Groups */
+.radio-group {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    accent-color: #4f0f0f;
+    cursor: pointer;
+}
+
+.radio-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    display: inline;
+}
+
+/* Checkbox Groups */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 8px;
+}
+
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-right: 8px;
+    accent-color: #1e3a8a;
+    cursor: pointer;
+}
+
+.checkbox-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    display: inline;
+}
+
+/* Land Measurement Section */
+.land-measurement {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f9fafb;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+}
+
+.measurement-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.measurement-item {
+    flex: 1;
+    min-width: 100px;
+}
+
+.measurement-item label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #1f2937;
+}
+
+.measurement-item input {
+    padding: 5px;
+    font-size: 14px;
+}
+
+/* Textarea */
+textarea {
+    resize: vertical;
+    min-height: 96px;
+}
+
+/* Submit Section */
+.submit-section {
+    text-align: center;
+    margin-top: 32px;
+}
+
+.submit-btn {
+    background-color: #701a1a;
+    color: #ffffff;
+    padding: 12px 48px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+    background-color: #4f0f0f;
+}
+
+/* Section Specific Styling */
+.location-section,
+.personal-info-section {
+    background-color: #9f9c9c0f;
+    border-color: #797575;
+}
+
+/* ===== VALIDATION STYLES - NEW ADDITION ===== */
+/* Error state for input fields */
+.error {
+    border-color: #dc2626 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1) !important;
+    background-color: #fef2f2;
+}
+
+/* Success state for input fields */
+.success {
+    border-color: #16a34a !important;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1) !important;
+    background-color: #f0fdf4;
+}
+
+/* Error message styling */
+.error-message {
+    color: #dc2626;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+    font-weight: 500;
+    padding: 4px 8px;
+    background-color: #fef2f2;
+    border-left: 3px solid #dc2626;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Success message styling */
+.success-message {
+    color: #16a34a;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+    font-weight: 500;
+    padding: 4px 8px;
+    background-color: #f0fdf4;
+    border-left: 3px solid #16a34a;
+    border-radius: 0 4px 4px 0;
+}
+
+/* Show validation messages */
+.error-message.show,
+.success-message.show {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* Fade in animation for validation messages */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Placeholder styling for NIC input */
+input[type="text"]::placeholder {
+    color: #9ca3af;
+    font-style: italic;
+}
+
+/* Enhanced focus states for better UX */
+input[type="text"].error:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2);
+}
+
+input[type="text"].success:focus {
+    border-color: #16a34a;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 24px;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+
+    .form-row .form-group {
+        min-width: 100%;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .radio-group,
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .measurement-row {
+        flex-direction: column;
+    }
+
+    .measurement-item {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 16px;
+        margin: 8px;
+    }
+
+    .description {
+        font-size: 13px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    input, textarea {
+        padding: 10px;
+        font-size: 13px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background-color: #ffffff;
+        padding: 0;
+    }
+
+    .container {
+        box-shadow: none;
+        max-width: 100%;
+        padding: 16px;
+    }
+
+    .submit-btn {
+        display: none;
+    }
+
+    .office-section,
+    .location-section,
+    .personal-info-section {
+        border: 1px solid #000;
+        background-color: #ffffff;
+        break-inside: avoid;
+    }
+
+    /* Hide validation messages in print */
+    .error-message,
+    .success-message {
+        display: none !important;
+    }
+}
