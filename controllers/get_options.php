@@ -10,7 +10,7 @@ if (isset($_GET['type'])) {
         }
     } elseif ($_GET['type'] == 'asc_centers') {
         $district = $_GET['district'] ?? '';
-        $sql = "SELECT asc_id, asc_sname FROM tbl_asc WHERE dis_id = '$district'";
+        $sql = "SELECT asc_id, asc_name FROM tbl_asc WHERE dis_id = '$district'";
         $result = $conn->query($sql);
         while ($row = $result->fetch_assoc()) {
             echo "<option value='" . $row['asc_id'] . "'>" . $row['asc_name'] . "</option>";

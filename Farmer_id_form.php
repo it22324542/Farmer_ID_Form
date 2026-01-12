@@ -28,7 +28,7 @@
 
                 <div class="form-group">
                     <label for="service-center">අයදුම්පත භාරගන්නා ගොවිජන සේවා මධ්‍යස්ථානය :</label>
-                    <select id="service-center" name="asc_center" required>
+                    <select id="service-center" name="asc_center">
                         <option value="">Select Service Center</option>
                         <?php
                         $asc_query = "SELECT asc_id, asc_name FROM tbl_asc";
@@ -613,6 +613,99 @@
             let isFormValid = true;
             const validationErrors = [];
             
+            // Ensure asc_center value is set before validation
+            const serviceCenterSelect = document.getElementById('service-center');
+            if (serviceCenterSelect && selectedAscId) {
+                serviceCenterSelect.value = selectedAscId;
+            }
+            
+            // Debug: Check form values before submission
+            console.log('ASC Center on submit:', serviceCenterSelect.value);
+            console.log('Selected ASC ID:', selectedAscId);
+            
+            // Validate farmer ID was generated (this confirms service center was selected)
+            const farmerIdElement = document.getElementById('farmer-id');
+            const farmerId = farmerIdElement ? farmerIdElement.value : '';
+            
+            if (!farmerId || farmerId === '' || farmerId === 'Loading...') {
+                validationErrors.push('කරුණාකර ගොවිජන සේවා මධ්‍යස්ථානය තෝරා ගොවි හැඳුනුම්පත් අංකය උත්පාදනය කරන්න');
+                isFormValid = false;
+            }
+            
+            // Validate required text fields
+            const fullNameEnglish = document.getElementById('full-name-english').value;
+            if (!fullNameEnglish || fullNameEnglish.trim() === '') {
+                validationErrors.push('සම්පූර්ණ නම (ඉංග්‍රීසියෙන්) අවශ්‍යයි');
+                isFormValid = false;
+            }
+            
+            const fullNameSinhala = document.getElementById('full-name-sinhala').value;
+            if (!fullNameSinhala || fullNameSinhala.trim() === '') {
+                validationErrors.push('සම්පූර්ණ නම (සිංහලෙන්) අවශ්‍යයි');
+                isFormValid = false;
+            }
+            
+            const birthDate = document.getElementById('birth-date').value;
+            if (!birthDate || birthDate === '') {
+                validationErrors.push('උපන්දිනය අවශ්‍යයි');
+                isFormValid = false;
+            }
+            
+            const nicNumber = document.getElementById('nic-number').value;
+            if (!nicNumber || nicNumber.trim() === '') {
+                validationErrors.push('ජාතික හැඳුනුම්පත් අංකය අවශ්‍යයි');
+                isFormValid = false;
+            } else {
+                const nicValidation = validateNIC(nicNumber);
+                if (!nicValidation.isValid) {
+                    validationErrors.push('ජාතික හැඳුනුම්පත් අංකය වලංගු නොවේ');
+                    isFormValid = false;
+                }
+            }
+            
+            const mobileNumber = document.getElementById('mobile-number').value;
+            if (!mobileNumber || mobileNumber.trim() === '') {
+                validationErrors.push('ජංගම දුරකථන අංකය අවශ්‍යයි');
+                isFormValid = false;
+            }
+            
+            const permanentAddress = document.getElementById('permanent-address').value;
+            if (!permanentAddress || permanentAddress.trim() === '') {
+                validationErrors.push('ස්ථීර ලිපිනය අවශ්‍යයි');
+                isFormValid = false;
+            }
+            
+            // Validate required radio buttons
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                validationErrors.push('ස්ත්‍රී / පුරුෂ භාවය තෝරන්න');
+                isFormValid = false;
+            }
+            
+            const farmingNature = document.querySelector('input[name="farming-nature"]:checked');
+            if (!farmingNature) {
+                validationErrors.push('ගොවිතැනේ ස්වභාවය තෝරන්න');
+                isFormValid = false;
+            }
+            
+            const pensionContributor = document.querySelector('input[name="pension-contributor"]:checked');
+            if (!pensionContributor) {
+                validationErrors.push('ගොවි විශ්‍රාම වැටුප් දායකත්වය තෝරන්න');
+                isFormValid = false;
+            }
+            
+            const landType = document.querySelector('input[name="land-type"]:checked');
+            if (!landType) {
+                validationErrors.push('ඉඩමේ වර්ගය (ගොඩ/මඩ) තෝරන්න');
+                isFormValid = false;
+            }
+            
+            const landOwnership = document.querySelector('input[name="ownership-of-the-land"]:checked');
+            if (!landOwnership) {
+                validationErrors.push('ඉඩමේ හිමිකාරිත්වය තෝරන්න');
+                isFormValid = false;
+            }
+            
             // Validate all fields
             const registeredOrg = document.getElementById('registered-org').value;
             if (registeredOrg && !validators.registeredOrg(registeredOrg).isValid) {
@@ -620,25 +713,7 @@
                 isFormValid = false;
             }
             
-            const fullNameEnglish = document.getElementById('full-name-english').value;
-            if (fullNameEnglish && !validators.fullNameEnglish(fullNameEnglish).isValid) {
-                validationErrors.push('ඉංග්‍රීසි නම වලංගු නොවේ');
-                isFormValid = false;
-            }
-            
-            const fullNameSinhala = document.getElementById('full-name-sinhala').value;
-            if (fullNameSinhala && !validators.fullNameSinhala(fullNameSinhala).isValid) {
-                validationErrors.push('සිංහල නම වලංගු නොවේ');
-                isFormValid = false;
-            }
-            
-            const nameWithInitials = document.getElementById('name-with-initials').value;
-            if (nameWithInitials && !validators.nameWithInitials(nameWithInitials).isValid) {
-                validationErrors.push('මුලකුරු සමඟ නම වලංගු නොවේ');
-                isFormValid = false;
-            }
-            
-            const mobileNumber = document.getElementById('mobile-number').value;
+            // Additional format validations for filled fields
             if (mobileNumber && !validators.mobileNumber(mobileNumber).isValid) {
                 validationErrors.push('ජංගම දුරකථන අංකය වලංගු නොවේ');
                 isFormValid = false;
@@ -650,58 +725,13 @@
                 isFormValid = false;
             }
             
-            const permanentAddress = document.getElementById('permanent-address').value;
-            if (permanentAddress && !validators.permanentAddress(permanentAddress).isValid) {
-                validationErrors.push('ස්ථීර ලිපිනය වලංගු නොවේ');
-                isFormValid = false;
-            }
-            
-            const temporaryAddress = document.getElementById('temporary-address').value;
-            if (temporaryAddress && !validators.temporaryAddress(temporaryAddress).isValid) {
-                validationErrors.push('තාවකාලික ලිපිනය වලංගු නොවේ');
-                isFormValid = false;
-            }
-            
-            // Validate land measurements if visible
-            const landMeasurement = document.getElementById('land-measurement');
-            if (landMeasurement.style.display === 'block') {
-                const acres = document.getElementById('acres').value;
-                if (acres && !validators.landMeasurement(acres).isValid) {
-                    validationErrors.push('අක්කර වලංගු නොවේ');
-                    isFormValid = false;
-                }
-                
-                const roods = document.getElementById('roods').value;
-                if (roods && !validators.landMeasurement(roods).isValid) {
-                    validationErrors.push('රූඩ් වලංගු නොවේ');
-                    isFormValid = false;
-                }
-                
-                const perches = document.getElementById('perches').value;
-                if (perches && !validators.landMeasurement(perches).isValid) {
-                    validationErrors.push('පර්චස් වලංගු නොවේ');
-                    isFormValid = false;
-                }
-            }
-            
-            // NIC validation
-            const nicValue = document.getElementById('nic-number').value;
-            if (nicValue) {
-                const nicValidation = validateNIC(nicValue);
-                if (!nicValidation.isValid) {
-                    validationErrors.push('ජාතික හැඳුනුම්පත් අංකය වලංගු නොවේ: ' + nicValidation.message);
-                    isFormValid = false;
-                }
-            }
-            
             if (!isFormValid) {
                 alert('කරුණාකර පහත දෝෂ නිවැරදි කරන්න:\n\n' + validationErrors.join('\n'));
                 return;
             }
             
-            alert('ෆෝම් සාර්ථකව ඉදිරිපත් කරන ලදී!');
-            // Uncomment to actually submit the form
-            // this.submit();
+            // Submit the form
+            this.submit();
         });
 
 
@@ -709,9 +739,13 @@
 
 
 
+        // Store selected ASC ID globally
+        let selectedAscId = '';
+        
         // Auto-generate Farmer ID when service center is selected
         document.getElementById('service-center').addEventListener('change', function() {
             const ascId = this.value;
+            selectedAscId = ascId; // Store for form submission
             const farmerIdInput = document.getElementById('farmer-id');
             
             if (ascId) {
